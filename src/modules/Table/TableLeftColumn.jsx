@@ -1,0 +1,67 @@
+import React from 'react';
+import styled, { css } from 'styled-components';
+import Scrollbar from 'react-scrollbars-custom';
+import Loading from '../../library/common/CommonComponents/Loading';
+import TableTd from './TableTd';
+
+const Column = styled(Scrollbar)`
+  display: flex;
+  justify-content: center;
+  min-height: 500px;
+`;
+
+const ColumnTd = styled.div`
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  border-bottom: 1px solid #000;
+  ${props =>
+		props.selected &&
+        css`
+      background-color: #f7f7f7;
+    `}
+`;
+
+const Th = styled.div`
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #000;
+  &:nth-last-child(1) {
+    border-left: 1px solid #000;
+  }
+`;
+
+
+export default function TableLeftColumn(props){
+	const { state, selectedItem, onSelectStation, onChangeLikes, likes } = props;
+	const { data } = state;
+    
+	return (
+		<Column>
+			<Th>Networks</Th>
+			{state && data.networks ? (
+				data.networks.map((item, index) => {
+					return (
+						<ColumnTd
+							selected={selectedItem === index ? true : ''}
+							key={item.id}
+						>
+							<TableTd
+								name={item.company}
+								key={item.id}
+								onSelectStation={onSelectStation}
+								onChangeLikes={onChangeLikes}
+								likes={likes}
+								index={index}
+							/>
+						</ColumnTd>
+					);
+				})
+			) : (
+				<Loading />
+			)}
+		</Column>
+	);
+
+}
+

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import styled from 'styled-components';
 
@@ -11,12 +11,12 @@ const Content = styled.span`
 
 
 export default function Loading() {
-    return (
-     <Content style={{ display: 'flex' }}>
-      <Spinner animation="border" role="status">
-       <div className="sr-only">Loading...</div>
-      </Spinner>
-     </Content>
-    );
-   }
+	return (
+		<Content>
+			<Spinner animation="border" role="status">
+				<div className="sr-only">Loading...</div>
+			</Spinner>
+		</Content>
+	);
+}
    

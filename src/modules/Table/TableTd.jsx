@@ -9,6 +9,10 @@ const Image = styled.img`
   color: red;
 `;
 
+const SelectedStation = styled.div`
+  min-width: 230px;
+`;
+
 export default function TableTd(props) {
 	const onSelected = () => {
 		const { index, onSelectStation } = props;
@@ -24,9 +28,9 @@ export default function TableTd(props) {
 
 	return (
 		<>
-			<div style={{ minWidth: '230px' }}>
+			<SelectedStation >
 				<div onClick={onSelected}>{name}</div>
-			</div>
+			</SelectedStation>
 			<div>
 				{likes[index] && likes[index].checked ? (
 					<Image
