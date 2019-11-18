@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Scrollbar from 'react-scrollbars-custom';
 import Loading from '../../library/common/CommonComponents/Loading';
 import TableTd from './TableTd';
@@ -15,11 +15,7 @@ const ColumnTd = styled.div`
   padding: 10px;
   justify-content: center;
   border-bottom: 1px solid #000;
-  ${props =>
-		props.selected &&
-        css`
-      background-color: #f7f7f7;
-    `}
+  background-color: ${props => props.selected && '#f7f7f7'}
 `;
 
 const Th = styled.div`
@@ -34,21 +30,21 @@ const Th = styled.div`
 
 export default function TableLeftColumn(props){
 	const { state, selectedItem, onSelectStation, onChangeLikes, likes } = props;
-	const { data } = state;
+	const { networks } = state;
     
 	return (
 		<Column>
 			<Th>Networks</Th>
-			{state && data.networks ? (
-				data.networks.map((item, index) => {
+			{state && networks ? (
+				networks.map(({company }, index) => {
 					return (
 						<ColumnTd
-							selected={selectedItem === index ? true : ''}
-							key={item.id}
+							selected={selectedItem === index}
+							key={index+300}
 						>
 							<TableTd
-								name={item.company}
-								key={item.id}
+								name={company}
+								key={index+300}
 								onSelectStation={onSelectStation}
 								onChangeLikes={onChangeLikes}
 								likes={likes}

@@ -24,28 +24,26 @@ const Content = styled.span`
   margin: 10px;
 `;
 
-
-export default function TableRightColumn(props){
-
-	const { detailInfo } = props;
-
-	return (
-		<Column>
-			<Th>List detail</Th>
-			{detailInfo && detailInfo.name && (
+export default function TableRightColumn(props) {
+	if (props.detailInfo) {
+		const { name, stations } = props.detailInfo;
+		return (
+			<Column>
+				<Th>List detail</Th>
 				<Th>
-            name station: {detailInfo && detailInfo.name} - lenght:
-					{detailInfo && detailInfo.name && detailInfo.stations.length}
+          name station: {name} - lenght:
+					{stations.length}
 				</Th>
-			)}
-			{detailInfo && detailInfo.name ? (
-				detailInfo.stations.map((station, index) => {
-					return <Content key={index}>{station.name}</Content>;
-				})
-			) : (
-				<Loading />
-			)}
-		</Column>
-	);
-	
+				{name ? (
+					stations.map(({ name: nameSation }, index) => {
+						return <Content key={index + 200}>{nameSation}</Content>;
+					})
+				) : (
+					<Loading />
+				)}
+			</Column>
+		);
+	}else{
+		return null;
+	}
 }
